@@ -107,6 +107,123 @@ void Perm(T list[], int k, int m)
         }
 }
 
+// Exercise 1.1
+template<class T>
+bool Input(T& x)
+{ // Input a nonnegative value.
+    int NumOfAttempts = 3;
+
+    // try at most NumOfAttempts times
+    for (int i = 0; i < NumOfAttempts; i++) {
+      cout << "Enter a nonnegative value" << endl;
+      cin >> x;
+      if (x >= 0) return true;
+      cout << x << " is not nonnegative" << endl;
+    }
+    // did not get nonnegative value
+    cout << "Sorry, you get only "
+        << NumOfAttempts << " chances."
+        << endl;
+    return false;
+}
+
+// Exercise 1.2
+template<class T>
+bool AscOrder(T list[], int size)
+{
+    cout << "LIST SIZE " << size << endl;
+    for (int i = 0; i < size - 1; i++) {
+        if (list[i] > list[i+1]) {
+            cout << i << " " << list[i] << " " << list[i+1] << " NOT ASC Order" << endl;
+            return false;
+        }
+    }
+
+    cout << "Yes, it is in ASC order" << endl;
+    return true;
+}
+
+// Exercise 1.3
+int factorial(int n)
+{
+    if (n<=1) return 1;
+    int fact = 1;
+    for (int i=1;i<=n;i++) {
+        fact *= i;
+    }
+    return fact;
+}
+
+// Exercise 1.4.1 Recursive fibonacci function
+int RFibonacci(int n)
+{
+    if (n<0) { cout << "Illeagel input!" << endl; return -1; }
+    if (n==0) return 0;
+    if (n==1) return 1;
+    return RFibonacci(n-1) + RFibonacci(n-2);
+}
+
+// Exercise 1.4.3 Non recursive fibonacci function
+int Fibonacci(int n)
+{
+    if (n<0) { cout << "Illeagel input!" << endl; return -1; }
+    if (n==0) return 0;
+    if (n==1) return 1;
+    if (n>=2) {
+        int a = 0;
+        int b = 1;
+        int result = 0;
+        for (int i=2;i<=n;i++) {
+            result = a + b;
+            a = b;
+            b = result;
+        }
+        return result;
+    }
+}
+
+// Exercise 1.5
+// define globals
+int x[20];  // subset vector
+void Subsets(int i, int n)
+{// Output all subsets of x[1:n].
+ // Only x[i:n] to be changed.
+   if (i == n) {// x[n] can be 0 or 1
+        // output subset without element n
+        x[n] = 0;
+        for (int j = 1; j <= n; j++)
+           cout << x[j] << " ";
+        cout << endl;
+
+        // output subset with element n
+        x[n] = 1;
+        for (int j = 1; j <= n; j++)
+           cout << x[j] << " ";
+        cout << endl;
+        return;
+    }
+
+    // leave element i out
+    x[i] = 0;
+    // generate all subsets with i out
+    Subsets(i+1, n);
+
+    // put element i into subset
+    x[i] = 1;
+    // generate all subsets with i included
+    Subsets(i+1, n);
+}
+
+// Exercise 1.6
+template<class T>
+int rSequentialSearch(T a[], int n, const T& x)
+{// Search the unordered list a[0:n-1] for x.
+ // Return position if found; return -1 otherwise.
+   if (n < 1) return -1;
+   if (a[n-1] == x) return n - 1;
+   return rSequentialSearch(a, n-1, x);
+}
+
 // Program 1.12 Allocate memory for a two-dimensional array
 template<class T>
 bool Make2DArray( T ** &x, int rows, int cols);
