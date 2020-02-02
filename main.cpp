@@ -21,5 +21,18 @@ int main()
     cout << "The permutations of 123 are" << endl;
     Perm(ab, 0, n-1);
 
+    int ac;
+    if (Input(ac)) cout << "The number is " << a << endl;
+    else cout << "Did not get a nonnegative number" << endl;
+
+    AscOrder(aa, 3);
+
+    cout << factorial(5) << endl;
+
+    cout << RFibonacci(3) << endl;
+    cout << Fibonacci(3) << endl;
+
+    Subsets(1, 4);
+
     return 0;
 }
